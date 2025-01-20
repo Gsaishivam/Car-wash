@@ -1,0 +1,12 @@
+<div class="carousel-container">
+  <!-- Previous button -->
+  <button class="carousel-control prev" (click)="prevImage()">&#10094;</button>
+
+  <!-- Carousel images -->
+  <div class="carousel-image">
+    <img [src]="images[currentIndex]" alt="Carousel Image">
+  </div>
+
+  <!-- Next button -->
+  <button class="carousel-control next" (click)="nextImage()">&#10095;</button>
+</div>
