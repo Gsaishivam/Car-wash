@@ -283,3 +283,4 @@ C:\.NET\Car wash\bin\Debug\net8.0\frontend\car_wash\package.json
 C:\.NET\Car wash\bin\Debug\net8.0\frontend\car_wash\tsconfig.app.json
 C:\.NET\Car wash\bin\Debug\net8.0\frontend\car_wash\tsconfig.json
 C:\.NET\Car wash\bin\Debug\net8.0\frontend\car_wash\tsconfig.spec.json
+C:\.NET\Car wash\obj\Debug\net8.0\Car wash.sourcelink.json

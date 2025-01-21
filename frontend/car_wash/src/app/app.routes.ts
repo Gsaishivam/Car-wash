@@ -9,5 +9,5 @@ export const routes: Routes = [
     {   path: 'admin/categories',component: CategoryListComponent},
     {   path:'login', component: LoginComponent},
     { path: 'signup', component: SignupComponent },
-    { path: '', redirectTo: '/Home', pathMatch: 'full' }
+    { path: '', component: CarouselComponent}
 ]
