@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Car_wash.Data.DTO;
 //using Microsoft.AspNetCore.Authorization;
 using Car_wash.Repository.Interface;
+using Microsoft.AspNetCore.Cors;
 
 namespace Car_wash.Controllers
 {

@@ -1,0 +1,106 @@
+/* Container for the entire checkout section */
+.checkout-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Style */
+.checkout-container h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form styling */
+.checkout-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.checkout-form label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Input fields styling */
+.checkout-form input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.checkout-form input:focus {
+  border-color: #4caf50;
+}
+
+/* Validation messages styling */
+.text-danger {
+  color: #d9534f;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+.text-info {
+  color: #5bc0de;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Button Styling */
+.checkout-form button {
+  padding: 12px;
+  font-size: 1.1rem;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.checkout-form button:hover:enabled {
+  background-color: #218838;
+}
+
+/* Spacing between form elements */
+.checkout-form input,
+.checkout-form button {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  /* For smaller screens */
+  .checkout-container {
+    padding: 15px;
+  }
+
+  .checkout-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .checkout-form form {
+    gap: 15px;
+  }
+
+  .checkout-form input,
+  .checkout-form button {
+    font-size: 1rem;
+  }
+}

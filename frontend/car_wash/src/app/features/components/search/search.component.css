@@ -1,0 +1,56 @@
+.search-container {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center horizontally */
+    margin: 20px auto; /* Add top/bottom margin and center horizontally */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50%; /* Adjust width as needed */
+    max-width: 600px; /* Set a maximum width */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .search-container h2 {
+      text-align: center; /* Center the heading */
+      margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input */
+    margin-bottom: 15px;
+    width: 100%; /* Make form groups take full width */
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    width: 100%;
+  }
+  
+  .search-container button {
+      padding: 10px 20px;
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s; /* Add a transition for hover effect */
+  }
+  
+  .search-container button:hover {
+      background-color: #45a049; /* Darker green on hover */
+  }

@@ -25,6 +25,11 @@ builder.Services.AddScoped<IHelper, HelperRepo>();
 builder.Services.AddScoped<IAdmin, AdminRepo>();
 builder.Services.AddAutoMapper(typeof(Signup_mapper));
 
+builder.Services.AddCors(options =>{
+    options.AddPolicy("AllowAllOrigins", builder => 
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+    );
+});
 var jwtKey = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrEmpty(jwtKey))
 {
@@ -56,6 +61,7 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
+app.UseCors("AllowAllOrigins");
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

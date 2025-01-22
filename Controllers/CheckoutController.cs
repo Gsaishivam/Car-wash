@@ -38,7 +38,9 @@ namespace Car_wash.Controllers
                 {
                     return BadRequest(new { message = "Order not found." });
                 }
-
+                if(order.PaymentStatus==1){
+                    return BadRequest(new{message="Already checked out."});
+                }
                 if (order.OrderStatus != 1)
                 {
                     return BadRequest(new { message = "Order is not accepted." });

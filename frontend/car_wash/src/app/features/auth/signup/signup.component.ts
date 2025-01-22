@@ -1,34 +1,48 @@
 import { Component } from '@angular/core';
-import { SignupRequest } from '../models/signup-request.model';  // Create this model
-import { UserService } from '../services/user.service'; // Service to handle signup
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SignupService } from '../services/signup.service'; // Import the signup service
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
-  imports: []
+  styleUrls: ['./signup.component.css'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class SignupComponent {
-  model: SignupRequest = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phoneNumber: ''
-  };
+  signupForm: FormGroup;
+  message = '';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private signupService: SignupService) {
+    this.signupForm = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]] // Regex for 10-digit phone number
+    });
+  }
 
-  onSubmit() {
-    this.userService.userSignup(this.model).subscribe(
-      response => {
-        console.log('Signup successful', response);
-        this.router.navigate(['/login']); // Redirect to login after successful signup
-      },
-      error => {
-        console.error('Signup error', error);
-      }
-    );
+  signup() {
+    if (this.signupForm.valid) {
+      const user = this.signupForm.value;
+      this.signupService.signup(user).subscribe(
+        (response) => {
+          if (response && response.token) {
+            sessionStorage.setItem('token', response.token); // Store token if response is successful
+            this.message = 'Signup successful!';
+          } else {
+            this.message = 'Signup failed: Token not found in response.';
+          }
+        },
+        (error) => {
+          this.message = `Signup failed: ${error.error || 'Unknown error'}`;
+        }
+      );
+    } else {
+      this.message = 'Please fill out all required fields correctly.';
+    }
   }
 }

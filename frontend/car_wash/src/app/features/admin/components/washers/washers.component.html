@@ -1,0 +1,10 @@
+<div class="washers-container">
+    <h2>Washers</h2>
+    <ul>
+      <li *ngFor="let washer of washers">
+        <span>{{ washer.name }}</span>
+        <button (click)="deleteWasher(washer.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  

@@ -1,0 +1,45 @@
+<div class="checkout-container">
+  <h2>Checkout</h2>
+
+  <!-- Checkout Form -->
+  <div class="checkout-form">
+    <form [formGroup]="checkoutForm" (ngSubmit)="checkout()">
+      <label for="orderID">Order ID:</label>
+      <input
+        type="number"
+        id="orderID"
+        formControlName="orderID"
+        placeholder="Enter order ID"
+        required
+      />
+
+      <label for="amount">Amount:</label>
+      <input
+        type="number"
+        id="amount"
+        formControlName="amount"
+        placeholder="Enter amount"
+        required
+      />
+
+      <!-- Validation Messages -->
+      <div
+        *ngIf="checkoutForm.get('amount')?.invalid && checkoutForm.get('amount')?.touched"
+        class="text-danger"
+      >
+        <small>Amount is required and should be greater than 0.</small>
+      </div>
+
+      <div
+        *ngIf="checkoutForm.get('orderID')?.invalid && checkoutForm.get('orderID')?.touched"
+        class="text-danger"
+      >
+        <small>Order ID is required.</small>
+      </div>
+
+      <button type="submit" [disabled]="checkoutForm.invalid">Checkout</button>
+    </form>
+  </div>
+
+  <p class="text-info mt-3">{{ message }}</p>
+</div>

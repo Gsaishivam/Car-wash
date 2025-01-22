@@ -1,0 +1,73 @@
+<div class="order-container">
+  <h2>Wash Orders</h2>
+  <div class="order-form">
+    <h3>Add New Order</h3>
+    <form [formGroup]="orderForm" (ngSubmit)="addOrder()">
+      <label for="washPackageName">Wash Package:</label>
+      <input type="text" id="washPackageName" formControlName="washPackageName" required />
+      <div *ngIf="orderForm.get('washPackageName')?.invalid && orderForm.get('washPackageName')?.touched" class="text-danger">
+        <small>Wash Package is required.</small>
+      </div>
+
+      <label for="washPackagePrice">Price:</label>
+      <input type="number" id="washPackagePrice" formControlName="washPackagePrice" required />
+      <div *ngIf="orderForm.get('washPackagePrice')?.invalid && orderForm.get('washPackagePrice')?.touched" class="text-danger">
+        <small>Price is required.</small>
+      </div>
+
+      <label for="carNumber">Car Number:</label>
+      <input type="text" id="carNumber" formControlName="carNumber" required />
+      <div *ngIf="orderForm.get('carNumber')?.invalid && orderForm.get('carNumber')?.touched" class="text-danger">
+        <small>Car Number is required.</small>
+      </div>
+
+      <label for="carType">Car Type:</label>
+      <input type="text" id="carType" formControlName="carType" required />
+      <div *ngIf="orderForm.get('carType')?.invalid && orderForm.get('carType')?.touched" class="text-danger">
+        <small>Car Type is required.</small>
+      </div>
+
+      <label for="orderDate">Order Date:</label>
+      <input type="date" id="orderDate" formControlName="orderDate" required />
+      <div *ngIf="orderForm.get('orderDate')?.invalid && orderForm.get('orderDate')?.touched" class="text-danger">
+        <small>Order Date is required.</small>
+      </div>
+
+      <button type="submit" [disabled]="orderForm.invalid">Add Order</button>
+    </form>
+  </div>
+
+  <!-- Display Orders -->
+  <div class="order-list">
+    <h3>Orders</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Car Number</th>
+          <th>Car Type</th>
+          <th>Package</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderID }}</td>
+          <td>{{ order.carNumber }}</td>
+          <td>{{ order.carType }}</td>
+          <td>{{ order.washPackageName }}</td>
+          <td>{{ order.washPackagePrice | currency }}</td>
+          <td>{{ order.orderStatus === 1 ? 'Active' : 'Cancelled' }}</td>
+          <td>
+            <button (click)="updateOrder(order.orderID)">Update</button>
+            <button (click)="cancelOrder(order.orderID)">Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="text-info mt-3">{{ message }}</p>
+</div>

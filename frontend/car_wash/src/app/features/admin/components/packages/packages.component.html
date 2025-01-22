@@ -1,0 +1,10 @@
+<div class="packages-container">
+    <h2>Wash Packages</h2>
+    <ul>
+      <li *ngFor="let pkg of packages">
+        <span>{{ pkg.name }} - {{ pkg.price }}</span>
+        <button (click)="deletePackage(pkg.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
