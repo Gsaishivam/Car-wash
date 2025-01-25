@@ -23,10 +23,11 @@ export class AdminLoginComponent {
         (response) => {
           if (response.token) {
             // Store JWT token in localStorage
-            localStorage.setItem('adminToken', response.token);
+            localStorage.setItem('token', response.token);
             
             // Navigate to the admin dashboard
-            this.router.navigate(['/admin']);
+            alert('Login successful');
+            this.router.navigate(['/admin/users']);
           } else {
             this.message = 'Login failed: No token received';
           }

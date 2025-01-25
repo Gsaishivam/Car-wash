@@ -20,12 +20,26 @@
           </ul>
         </li> -->
         <li class="nav-item search">
-          <a class="nav-link search" [routerLink]="['/search']" routerLinkActive="active">Search</a>
+          <a class="nav-link search" aria-current="page" [routerLink]="['/search']" routerLinkActive="active">Search</a>
         </li>
-      </ul>
 
+      <li class="nav-item admin_login">
+        <a class="nav-link admin_login" aria-current="page" [routerLink]="['/admin_login']" routerLinkActive="active">Admin</a>
+      </li>
+      <li class="nav-item order">
+        <a class="nav-link order" aria-current="page" [routerLink]="['/order']" routerLinkActive="active">Order</a>
+      </li>
+      <li class="nav-item checkout">
+        <a class="nav-link checkout" aria-current="page" [routerLink]="['/checkout']" routerLinkActive="active">Checkout</a>
+      </li>
+      <li class="nav-item reviews">
+        <a class="nav-link reviews" aria-current="page" [routerLink]="['/reviews']" routerLinkActive="active">Reviews</a>
+      </li>
+    </ul>
       <div class="d-flex">
-        <a [routerLink]="['/login']" routerLinkActive="active" class="btn btn-primary">Login</a>
+        <a *ngIf="!isLoggedIn" [routerLink]="['/login']" routerLinkActive="active" class="btn btn-primary">Login</a>
+        <button *ngIf="isLoggedIn" (click)="logout()" class="btn btn-danger">Logout</button>
+        <button *ngIf="!isAdminLoggedIn" (click)="Adminlogout()" class="btn btn-danger">Logout</button>
       </div>
     </div>
   </div>

@@ -1,10 +1,63 @@
 <div class="users-container">
-    <h2>Users</h2>
-    <ul>
-      <li *ngFor="let user of users">
-        <span>{{ user.name }}</span>
-        <button (click)="deleteUser(user.id)">Delete</button>
-      </li>
-    </ul>
-  </div>
-  
+  <h2>Users</h2>
+
+  <!-- Display users list -->
+  <table *ngIf="users.length > 0" class="users-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.userID }}</td> <!-- ID column -->
+        <td>{{ user.firstName }} {{ user.lastName }}</td> <!-- Full Name column -->
+        <td>{{ user.phoneNumber }}</td> <!-- Phone column -->
+        <td>
+          <button (click)="deleteUser(user.userID)" class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No data message -->
+  <p *ngIf="users.length === 0">No users available.</p>
+</div>
+
+<!-- Orders Section -->
+<div class="orders-container">
+  <h2>Orders</h2>
+
+  <!-- Display orders list -->
+  <table *ngIf="orders.length > 0" class="orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>User ID</th>
+        <th>Order Status</th>
+        <th>Payment Status</th>
+        <th>Wash Completed</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.orderID }}</td> <!-- Order ID column -->
+        <td>{{ order.userID }}</td> <!-- User ID column -->
+        <td>{{ getOrderStatus(order.orderStatus) }}</td> <!-- Order Status column -->
+        <td>{{ getPaymentStatus(order.paymentStatus) }}</td> <!-- Payment Status column -->
+        <td>{{ getWashStatus(order.washCompletedStatus) }}</td> <!-- Wash Completed column -->
+        <td>
+          <button (click)="deleteOrder(order.orderID)" class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No data message -->
+  <p *ngIf="orders.length === 0">No orders available.</p>
+</div>
+

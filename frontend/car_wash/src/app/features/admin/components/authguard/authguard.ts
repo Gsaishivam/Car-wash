@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 
 @Injectable({
@@ -8,11 +8,15 @@ import { AdminService } from '../../services/admin.service';
 export class AuthGuard implements CanActivate {
   constructor(private adminService: AdminService, private router: Router) {}
 
-  canActivate(): boolean {
-    if (this.adminService.isAdminLoggedIn()) {
-      return true;
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return true; // Allow access
     } else {
-      this.router.navigate(['/admin_login']);
+      this.router.navigate(['/admin_login']); // Redirect to login if no token
       return false;
     }
   }

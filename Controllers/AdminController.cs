@@ -218,7 +218,7 @@ namespace Car_wash.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Error deleting washer: " + ex.Message });
+                return StatusCode(500, new { message = "Error deleting washer hi hi hi: " + ex.Message });
             }
         }
 
@@ -243,6 +243,10 @@ namespace Car_wash.Controllers
         [HttpPost("packages")]
         public async Task<IActionResult> AddPackage([FromBody] WashPackages x)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { message = "One or more validation errors occurred.", errors = ModelState });
+            }
             try
             {
                 var result = await _adminRepo.AddPackageAsync(x);

@@ -1,9 +1,46 @@
-<div class="admin-functions-container">
-    <h2>Admin Functions</h2>
+<!-- admin-functions.component.html -->
+<div class="container">
+  <h2>Admin Functions</h2>
+  
+  <!-- Leaderboard Section -->
+  <div>
+    <h3>Leaderboard</h3>
     <ul>
-      <li><a routerLink="/admin/users">Manage Users</a></li>
-      <li><a routerLink="/admin/packages">Manage Packages</a></li>
-      <li><a routerLink="/admin/washers">Manage Washers</a></li>
+      <li *ngFor="let leader of leaderboard">
+        <div class="leader-rank">Rank: {{ leader.rank }}</div>
+        <div class="leader-name">{{ leader.name }}</div>
+        <div class="leader-water-saved">Water Saved: {{ leader.water_saved }} liters</div>
+      </li>
     </ul>
   </div>
-  
+
+  <!-- Orders List Section -->
+  <div>
+    <h3>Orders</h3>
+
+    <!-- Order ID Input and Display Payment Status -->
+    <div class="order-id-section">
+      <label for="orderId">Enter Order ID:</label>
+      <input type="number" id="orderId" [(ngModel)]="orderId" (input)="fetchPaymentStatus()" placeholder="Enter Order ID" />
+      <div *ngIf="paymentStatus !== ''" class="payment-status">
+        <p>Status: <span>{{ paymentStatus }}</span></p>
+      </div>
+    </div>
+
+    <!-- Display Orders -->
+    <ul>
+      <li *ngFor="let order of ordersWithWasher">
+        <div>Order ID: {{ order.orderID }}</div>
+        <div>Status: {{ getPaymentStatusText(order.paymentStatus) }}</div>
+        <div *ngIf="!order.washerID">
+          <button (click)="assignOrderToWasher(order.orderID)">
+            Assign Order
+          </button>
+        </div>
+        <div *ngIf="order.washerID">
+          <span>Assigned to Washer ID: {{ order.washerID }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -36,6 +36,7 @@ export class CheckoutComponent implements OnInit {
       this.checkoutService.processCheckout(checkoutDTO).subscribe(
         (response) => {
           this.message = 'Checkout processed successfully!';
+          alert('Checkout processed successfully!');
           console.log('Checkout success:', response);
         },
         (error) => {

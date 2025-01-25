@@ -32,3 +32,36 @@
 .carousel-control.next {
   right: 10px;
 }
+
+/* Container for centering the content */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  text-align: center;
+  padding: 0 20px; /* Padding to avoid text touching the edges */
+}
+
+/* Intro text styling */
+.intro-text {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+  max-width: 800px; /* Optional: To prevent it from becoming too wide */
+}
+
+/* Bullet points list */
+.feature-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 1rem;
+  color: #444;
+  margin-top: 0;
+  max-width: 800px; /* Optional: To prevent it from becoming too wide */
+}
+
+.feature-list li {
+  margin-bottom: 10px;
+}

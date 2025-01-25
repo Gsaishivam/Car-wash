@@ -17,15 +17,36 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private adminService: AdminService, private router: Router) {}
 
   ngOnInit(): void {
-    // Check if admin is logged in
+    // Ensure the admin is logged in
     if (!this.adminService.isAdminLoggedIn()) {
-      this.router.navigate(['/admin/dashboard']);
+      this.router.navigate(['/admin']);
     }
   }
 
+  // Handle logout and navigate back to login page
   logout(): void {
-    localStorage.removeItem('adminToken');
+    this.adminService.logout();
     this.router.navigate(['/admin_login']);
+  }
+
+  // Navigate to the selected category (e.g., Users, Packages, etc.)
+  navigateToCategory(category: string): void {
+    switch (category) {
+      case 'Users':
+        this.router.navigate(['/admin/users']);
+        break;
+      case 'Packages':
+        this.router.navigate(['/admin/packages']);
+        break;
+      case 'Washers':
+        this.router.navigate(['/admin/washers']);
+        break;
+      case 'Admin Functions':
+        this.router.navigate(['/admin/admin-functions']);
+        break;
+      default:
+        break;
+    }
   }
 }
 

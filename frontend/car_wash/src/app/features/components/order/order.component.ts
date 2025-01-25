@@ -49,6 +49,7 @@ export class OrderComponent implements OnInit {
       this.orderService.addOrder(newOrder).subscribe(
         (response) => {
           this.message = `Order added successfully. Order ID: ${response.orderID}`;
+          alert(`Order added successfully. Order ID: ${response.orderID}`);
           this.fetchOrders(); // Fetch orders after adding a new one
         },
         (error) => {

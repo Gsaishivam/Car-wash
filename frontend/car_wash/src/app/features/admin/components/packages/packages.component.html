@@ -1,10 +1,47 @@
+<!-- admin-packages.component.html -->
+
 <div class="packages-container">
-    <h2>Wash Packages</h2>
-    <ul>
-      <li *ngFor="let pkg of packages">
-        <span>{{ pkg.name }} - {{ pkg.price }}</span>
-        <button (click)="deletePackage(pkg.id)">Delete</button>
-      </li>
-    </ul>
+  <h2>Packages</h2>
+
+  <!-- Add Package Form -->
+  <div class="add-package-form">
+    <h3>Add New Package</h3>
+    <form (submit)="addPackage()">
+      <label for="packagename">Package name</label>
+      <input type="text" id="packagename" [(ngModel)]="newPackage.name" name="name" required />
+
+      <label for="packageprice">Package price</label>
+      <input type="number" id="packageprice" [(ngModel)]="newPackage.price" name="price" required />
+      
+      <label for="packagedescription">Package description</label>
+      <input type="text" id="packagedescription" [(ngModel)]="newPackage.description" name="description" required />
+
+      <button type="submit" class="add-btn">Add Package</button>
+    </form>
   </div>
-  
+
+  <!-- Display packages list -->
+  <table *ngIf="packages" class="packages-table">
+    <thead>
+      <tr>
+        <th>Package ID</th>
+        <th>Package name</th>
+        <th>price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let package of packages">
+        <td>{{ package.packageID }}</td>
+        <td>{{ package.name }}</td>
+        <td>{{ package.price | currency:'INR' }}</td>
+        <td>
+          <button (click)="deletePackage(package.packageID)" class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No data message -->
+  <p *ngIf="!packages || packages.length === 0">No packages available.</p>
+</div>

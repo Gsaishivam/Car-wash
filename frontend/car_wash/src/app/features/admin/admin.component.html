@@ -1,4 +1,4 @@
-<div class="admin-dashboard">
+<!-- <div class="admin-dashboard">
     <h2>Admin Dashboard</h2>
   
     <div class="categories">
@@ -9,4 +9,20 @@
   
     <button (click)="logout()">Logout</button>
   </div>
-  
+   -->
+<!-- admin-dashboard.component.html -->
+<div class="dashboard-container">
+  <h2>Admin Dashboard</h2>
+
+  <!-- Categories dropdown -->
+  <div *ngFor="let category of categories">
+    <button (click)="navigateToCategory(category)">
+      {{ category }}
+    </button>
+  </div>
+
+  <!-- Logout button -->
+  <button (click)="logout()">Logout</button>
+  <router-outlet></router-outlet>
+</div>
+

@@ -5,7 +5,7 @@ import { SignupComponent } from './features/auth/signup/signup.component';
 import { SearchComponent } from './features/components/search/search.component';
 import { OrderComponent } from './features/components/order/order.component';
 import { CheckoutComponent } from './features/components/checkout/checkout.component';
-import { ReviewsComponent } from './features/components/reviews/reviews.component';
+import { ReviewComponent} from './features/components/reviews/reviews.component';
 import { AdminFunctionsComponent } from './features/admin/components/admin-functions/admin-functions.component';
 import { AdminDashboardComponent } from './features/admin/admin.component';
 import { AuthGuard } from './features/admin/components/authguard/authguard';
@@ -21,18 +21,11 @@ export const routes: Routes = [
     {path:'search',component:SearchComponent},
     {path:'order',component:OrderComponent},
     {path:'checkout',component:CheckoutComponent},
-    {path:'reviews',component:ReviewsComponent},
-    {
-        path: 'admin',
-        component: AdminDashboardComponent,
-        canActivate: [AuthGuard], // Admin guard
-        children: [
-          { path: 'users', component: UsersComponent },
-          { path: 'packages', component: PackagesComponent },
-          { path: 'washers', component: WashersComponent },
-          { path: 'admin-functions', component: AdminFunctionsComponent },
-        ],
-      },
-      {path:'admin_login',component:AdminLoginComponent}
-      
+    {path:'reviews',component:ReviewComponent},
+      {path:'admin',component:AdminDashboardComponent},
+      {path:'admin_login',component:AdminLoginComponent},
+      { path: 'admin/users', component: UsersComponent },  
+      { path: 'admin/packages', component: PackagesComponent },
+      { path: 'admin/washers', component: WashersComponent },
+      { path: 'admin/admin-functions', component: AdminFunctionsComponent },
 ]

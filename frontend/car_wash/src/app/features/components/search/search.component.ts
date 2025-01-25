@@ -40,11 +40,10 @@ export class SearchComponent implements OnInit {
       this.isLoading = true;
   
       const searchParams = this.searchForm.value;
-  
-      // If no parameters are provided, get all wash packages
+
       this.getSearchResults(searchParams).subscribe(
         (response) => {
-          this.isLoading = false; // Hide loading indicator once results are returned
+          this.isLoading = false; 
           if (response.length > 0) {
             this.searchResults = response;
           } else {
