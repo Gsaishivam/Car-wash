@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CommonModule } from '@angular/common';
  import { AdminService } from '../../admin/services/admin.service';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '/.NET/Car wash/frontend/car_wash/src/app/features/auth/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,30 +15,31 @@ import { Router, RouterModule } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   message = '';
- 
-  constructor(private LoginService: LoginService, private AdminService:AdminService,private formBuilder: FormBuilder,private router: Router) {
+
+  constructor(
+    private LoginService: LoginService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService  // Inject AuthService
+  ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
- 
+
   login() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
       this.LoginService.login(credentials).subscribe(
         (response) => {
           if (response && response.token) {
-            // Store the token in session storage
             sessionStorage.setItem('token', response.token);
- 
-            // Confirm token storage in the session
-            console.log('Token stored in session:', sessionStorage.getItem('token'));
- 
-            this.message = 'Login successful!';
+            localStorage.removeItem('token');
+            this.authService.setLoggedIn(true);
             alert('Login successful!');
-            //this.router.navigate(['/order']);
-            window.location.reload();
+            //window.location.reload();
+            this.router.navigate(['/search']);
           } else {
             this.message = 'Login failed: Token not found in response.';
           }
@@ -46,10 +48,10 @@ export class LoginComponent {
           this.message = `Login failed: ${error.error || 'Unknown error'}`;
         }
       );
-    } 
-    else {
+    } else {
       this.message = 'Please fill out all required fields correctly.';
     }
   }
 }
+
 

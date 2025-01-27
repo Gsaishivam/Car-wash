@@ -79,8 +79,8 @@ export class UsersComponent implements OnInit {
   getOrderStatus(status: number): string {
     switch (status) {
       case 0: return 'Pending';
-      case 1: return 'In Progress';
-      case 2: return 'Completed';
+      case 1: return 'Completed';
+      case 2: return 'Canceled';
       default: return 'Unknown';
     }
   }

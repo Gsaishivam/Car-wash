@@ -18,6 +18,7 @@ namespace Car_wash.Repository.Implementation
         {
             var order = await _context.Orders.FindAsync(reviewDTO.OrderID);
             if (order == null) return null;
+            if(order.PaymentStatus != 1) return null; 
 
             var existingReview = await _context.Reviews.FirstOrDefaultAsync(r => r.OrderID == reviewDTO.OrderID);
             if (existingReview != null) return null;

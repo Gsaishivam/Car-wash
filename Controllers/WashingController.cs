@@ -70,17 +70,29 @@ namespace Car_wash.Controllers
             #endregion
 
             #region washers_assign
-            await _washingRepository.AssignWasherToOrderAsync(OrderID);
-            var orderAfterAssign = await _washingRepository.GetOrderByIdAsync(OrderID);
+            try
+            {
+                await _washingRepository.AssignWasherToOrderAsync(OrderID);
+                var orderAfterAssign = await _washingRepository.GetOrderByIdAsync(OrderID);
+                var washer = await _helperRepo.GetWasherByOrderIdAsync(OrderID);
 
-            var washer = await _helperRepo.GetWasherByOrderIdAsync(OrderID);
-            await _emailService.SendEmailAsync(
-                washer.Email,
-                "Welcome to Car Wash Service!",
-                $"Dear {washer.FirstName} {washer.LastName},<br/>You have successfully accepted the order id: {order.OrderID}<br/>"
-            );
+                if (washer == null)
+                {
+                    return BadRequest(new { message = "No washer found for this order." });
+                }
 
-            return Ok(new { message = "Order accepted by the washer id: " + order.WasherID });
+                await _emailService.SendEmailAsync(
+                    washer.Email,
+                    "Welcome to Car Wash Service!",
+                    $"Dear {washer.FirstName} {washer.LastName},<br/>You have successfully accepted the order id: {order.OrderID}<br/>"
+                );
+
+                return Ok(new { message = "Order accepted by the washer id: " + order.WasherID });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while assigning washer to order.", error = ex.Message });
+            }
             #endregion
         }
     }

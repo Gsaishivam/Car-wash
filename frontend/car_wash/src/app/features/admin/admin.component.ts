@@ -26,6 +26,7 @@ export class AdminDashboardComponent implements OnInit {
   // Handle logout and navigate back to login page
   logout(): void {
     this.adminService.logout();
+    localStorage.removeItem('token');
     this.router.navigate(['/admin_login']);
   }
 

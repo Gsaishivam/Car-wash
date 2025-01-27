@@ -43,7 +43,7 @@ namespace Car_wash.Controllers
             var review = await _reviewRepository.AddReviewAsync(reviewDTO);
             if (review == null)
             {
-                return BadRequest(new { message = "Order not found or review already exists." });
+                return BadRequest(new { message = "Order not found or review already exists or payment pending." });
             }
 
             var order = await _helperRepo.GetOrderByIdAsync(reviewDTO.OrderID);
